@@ -1,28 +1,19 @@
-// extern crate rand;
+extern crate rand;
 
 use rand::Rng;
 use std::io;
 
 fn main() {
     println!("Welcome to our Guessing game");
-    println!("Your task is to find the magic number between the range of the two numbers below that you will defined \n");
+    println!("Your task is to guess the magic number between the range of the two numbers below that you will defined \n");
 
     println!("Choose the start of the range number: ");
-    let mut input_range_start = String::new();
-    io::stdin()
-        .read_line(&mut input_range_start)
-        .unwrap();
-    
-    let range_start: i32 = input_range_start.trim().parse().unwrap();
-    
+    let input_range_start = String::new();
+    let range_start = convert_string_input_to_integer(input_range_start);
 
     println!("Choose the end of the range number: ");
-    let mut input_range_stop = String::new();
-    io::stdin()
-        .read_line(&mut input_range_stop)
-        .unwrap();
-    
-    let range_stop: i32 = input_range_stop.trim().parse().unwrap();
+    let input_range_stop = String::new();
+    let range_stop = convert_string_input_to_integer(input_range_stop);
 
     println!("The numbers you selected are {} and {} \n", range_start, range_stop);
 
@@ -57,4 +48,13 @@ fn main() {
             break
         }
     }
+}
+
+
+fn convert_string_input_to_integer(mut input_range: String) -> i32 {
+    io::stdin()
+        .read_line(&mut input_range)
+        .unwrap();
+    let range: i32 = input_range.trim().parse().unwrap();
+    range
 }
