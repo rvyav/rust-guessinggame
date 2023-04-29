@@ -3,6 +3,9 @@ extern crate rand;
 use rand::Rng;
 use std::io;
 
+use guessing_game::convert_string_input_to_integer;
+
+
 fn main() {
     println!("Welcome to our Guessing game");
     println!("Your task is to guess the magic number between the range of the two numbers below that you will defined \n");
@@ -18,7 +21,7 @@ fn main() {
     println!("The numbers you selected are {} and {} \n", range_start, range_stop);
 
     let random_number = rand::thread_rng().gen_range(range_start..range_stop);
-    let is_magic_number_found = false;
+    let mut is_magic_number_found = false;
 
     while !is_magic_number_found {
         println!("Guess what the magic number is:");
@@ -45,16 +48,9 @@ fn main() {
             println!("Please try again \n");
         } else {
             println!("YOU WON!!!!!, the number is {}", random_number);
-            break
+            is_magic_number_found = true;
         }
     }
 }
 
 
-fn convert_string_input_to_integer(mut input_range: String) -> i32 {
-    io::stdin()
-        .read_line(&mut input_range)
-        .unwrap();
-    let range: i32 = input_range.trim().parse().unwrap();
-    range
-}
